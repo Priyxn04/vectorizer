@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vectorizer</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">Local SVG Studio</p>
+        <h1>Turn any raster image into a clean vector you can preview and download.</h1>
+        <p class="hero-copy">
+          Upload PNG, JPG, WebP, GIF, or other common image formats, tweak the trace,
+          and export an SVG that stays crisp at any size.
+        </p>
+      </header>
+
+      <main class="app-grid">
+        <section class="panel controls-panel">
+          <form id="vectorize-form">
+            <label class="upload-zone" for="image-input" id="upload-zone">
+              <input id="image-input" name="image" type="file" accept="image/*" required />
+              <span class="upload-title">Drop an image here or click to upload</span>
+              <span class="upload-subtitle">Best results come from high-contrast artwork and logos.</span>
+              <span class="upload-file" id="upload-file">No file selected</span>
+            </label>
+
+            <div class="control-group">
+              <div class="control-header">
+                <label for="threshold">Threshold</label>
+                <output id="threshold-value">180</output>
+              </div>
+              <input id="threshold" name="threshold" type="range" min="0" max="255" value="180" />
+            </div>
+
+            <div class="control-group">
+              <div class="control-header">
+                <label for="turdSize">Detail Cleanup</label>
+                <output id="turdSize-value">2</output>
+              </div>
+              <input id="turdSize" name="turdSize" type="range" min="0" max="20" value="2" />
+            </div>
+
+            <div class="control-group">
+              <div class="control-header">
+                <label for="optTolerance">Curve Smoothness</label>
+                <output id="optTolerance-value">0.20</output>
+              </div>
+              <input
+                id="optTolerance"
+                name="optTolerance"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.2"
+              />
+            </div>
+
+            <div class="control-group" id="posterize-group" hidden>
+              <div class="control-header">
+                <label for="posterizeLevels">Posterize Levels</label>
+                <output id="posterizeLevels-value">4</output>
+              </div>
+              <input
+                id="posterizeLevels"
+                name="posterizeLevels"
+                type="range"
+                min="2"
+                max="8"
+                value="4"
+              />
+            </div>
+
+            <div class="toggles">
+              <label class="toggle">
+                <input type="checkbox" name="monochrome" checked />
+                <span>Monochrome trace</span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" name="highContrast" />
+                <span>Boost contrast</span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" name="invert" />
+                <span>Invert source tones</span>
+              </label>
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="primary-button" id="vectorize-button">
+                Vectorize Image
+              </button>
+              <button type="button" class="secondary-button" id="download-button" disabled>
+                Download SVG
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel preview-panel">
+          <div class="preview-column">
+            <div class="preview-label-row">
+              <h2>Original</h2>
+              <span id="original-meta">Nothing uploaded yet</span>
+            </div>
+            <div class="preview-card checkerboard">
+              <img id="original-preview" alt="Original upload preview" hidden />
+              <div class="empty-state" id="original-empty">
+                Your original image preview appears here.
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-column">
+            <div class="preview-label-row">
+              <h2>Vector Output</h2>
+              <span id="result-meta">Generate an SVG to preview it here</span>
+            </div>
+            <div class="preview-card checkerboard">
+              <div id="svg-preview" class="svg-preview" hidden></div>
+              <div class="empty-state" id="result-empty">
+                Your vectorized SVG will appear here after processing.
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="status-bar">
+        <span id="status-message">Ready for upload.</span>
+      </footer>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
