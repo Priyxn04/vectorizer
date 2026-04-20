@@ -14,13 +14,13 @@ Local image vectorizer app that lets you upload an image, preview the traced res
 1. Install dependencies:
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. Start the app:
 
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 3. Open [http://localhost:3000](http://localhost:3000)

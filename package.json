@@ -2,6 +2,7 @@
   "name": "vectorizer",
   "version": "1.0.0",
   "description": "Local image vectorizer app with upload, preview, and SVG download",
+  "packageManager": "pnpm@10.32.1",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
